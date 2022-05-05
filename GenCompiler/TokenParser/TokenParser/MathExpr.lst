@@ -1,0 +1,63 @@
+
+// ==========================================================================
+//  GPPG error listing for yacc source file <.\MathExpr.y - 2022/5/5 9:24:12>
+// ==========================================================================
+//  Version:  1.5.2
+//  Machine:  DESKTOP-1F8U1G4
+//  DateTime: 2022/5/5 9:24:14
+//  UserName: zyxia
+// ==========================================================================
+
+
+
+
+
+%namespace MathParser
+
+%YYSTYPE MathParser.Scanner.Node
+%start list
+%output=Parser.cs 
+%partial 
+
+
+%token WORLD NUMBER SIN COS VIRTUAL 
+%token PLUS MINUS MUL DIVIDE
+%token COMMA LEFT_PARENTHESES RIGHT_PARENTHESES
+
+%left PLUS MINUS
+%left MUL DIVIDE  
+%left UMINUS
+
+%%
+
+ 
+expres_s  :    LEFT_PARENTHESES expres_s RIGHT_PARENTHESES  { $$ = $2;}
+        |   expres_s PLUS expres_s                          { $$ = MathParser.Scanner.MakePlusNode($3);}
+        |   expres_s MINUS expres_s                         { $$ = MathParser.Scanner.MakeMinusNode($3);}
+        |   expres_s MUL expres_s                           { $$ = MathParser.Scanner.MakeMulNode($3);}
+        |   expres_s DIVIDE expres_s                        { $$ = MathParser.Scanner.MakeDivideNode($3);}
+        |   WORLD                                           { $$ = MathParser.Scanner.MakeVariableNode($3);}
+// Error: Semantic action index is out of bounds
+// ---------------------------------------------
+        |   NUMBER                                          { $$ = MathParser.Scanner.MakeConstNode($3);}
+// Error: Semantic action index is out of bounds
+// ---------------------------------------------
+        |   SIN LEFT_PARENTHESES expres_s RIGHT_PARENTHESES {
+                                                                $$ = MathParser.Scanner.MakeSinNode($3);
+                                                            } 
+        |   COS LEFT_PARENTHESES expres_s RIGHT_PARENTHESES {
+                                                                $$ = MathParser.Scanner.MakeCosNode($3);
+                                                            }
+        |   MINUS expres_s %prec UMINUS  
+;
+list: expres_s  {yyerrok(); };
+
+
+%%
+/*
+ * All the code is in the helper file RealTreeHelper.cs
+ 
+     
+ */ 
+// ==========================================================================
+
