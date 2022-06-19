@@ -24,26 +24,26 @@ RealNum              ([1-9]\d*\.?\d*)|(-?0\.\d*[1-9])
 [a-zA-Z_][a-zA-Z0-9_]*           {
                                         if ( yytext == "sin")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.SIN;
                                         }
                                         if ( yytext == "cos")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.COS;
                                         }
                                         if ( yytext == "virtual")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.VIRTUAL;
                                         }
                                         
-                                        System.Console.WriteLine(yytext);
+                                        //System.Console.WriteLine(yytext);
                                         yylval =  MakeVariableNode(yytext);
                                         return (int)Tokens.WORLD;
                                }
 ([1-9][0-9]*\.[0-9]+)|(0\.[0-9]+)|([1-9][0-9]*) {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             yylval =  MakeConstNode(yytext);
                                             return (int)Tokens.NUMBER;
                                         } 
@@ -63,76 +63,7 @@ RealNum              ([1-9]\d*\.?\d*)|(-?0\.\d*[1-9])
   /*  User code is in ParseHelper.cs  */
 
 // =============================================================
-
-public abstract class Node
-{
-
-}
-public class SinNode:Node
-{
-    Node _child;
-    public SinNode(Node child){
-        this._child = child;
-    }
-}
-public class CosNode:Node
-{
-    Node _child;
-    public CosNode(Node child){
-        this._child = child;
-    }
-}
-public class PlusNode:Node
-{
-    Node _left;
-    Node _right;
-    public PlusNode(Node lfs,Node right){
-        this._left = lfs;
-        this._right = right;
-    }
-}
-public class MinusNode:Node
-{
-      Node _left;
-        Node _right;
-    public MinusNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-
-public class MulNode:Node
-{
-    Node _left;
-      Node _right;
-    public MulNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-public class DivideNode:Node
-{
-    Node _left;
-      Node _right;
-    public DivideNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-public class VariableNode:Node
-{
-    string _paramName;
-    public VariableNode(string param){
-        this._paramName = param;
-    }
-}
-public class ConstNode:Node
-{
-    float _value;
-    public ConstNode(string param){
-        this._value = float.Parse(param);
-    }
-}
+ 
 
 public static Node MakeSinNode(Node rhs ) {
  return new SinNode( rhs );

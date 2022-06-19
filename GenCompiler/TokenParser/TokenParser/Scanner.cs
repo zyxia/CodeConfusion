@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  DESKTOP-1F8U1G4
-//  DateTime: 2022/5/5 11:38:27
+//  DateTime: 2022/6/7 22:37:36
 //  UserName: zyxia
-//  GPLEX input file <.\MathExpr.lex - 2022/5/5 11:38:16>
+//  GPLEX input file <.\MathExpr.lex - 2022/6/7 22:37:12>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: verbose, parser, stack, minimize
@@ -643,28 +643,27 @@ int NextState() {
         case 1: // Recognized '[a-zA-Z_][a-zA-Z0-9_]*',	Shortest string "A"
 if ( yytext == "sin")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.SIN;
                                         }
                                         if ( yytext == "cos")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.COS;
                                         }
                                         if ( yytext == "virtual")
                                         {
-                                            System.Console.WriteLine(yytext);
+                                            //System.Console.WriteLine(yytext);
                                             return (int)Tokens.VIRTUAL;
                                         }
                                         
-                                        System.Console.WriteLine(yytext);
+                                        //System.Console.WriteLine(yytext);
                                         yylval =  MakeVariableNode(yytext);
                                         return (int)Tokens.WORLD;
             break;
         case 2: // Recognized '([1-9][0-9]*\.[0-9]+)|(0\.[0-9]+)|([1-9][0-9]*)',	Shortest string "1"
         case 10: // Recognized '([1-9][0-9]*\.[0-9]+)|(0\.[0-9]+)|([1-9][0-9]*)',	Shortest string "0.0"
-System.Console.WriteLine(yytext);
-                                            yylval =  MakeConstNode(yytext);
+yylval =  MakeConstNode(yytext);
                                             return (int)Tokens.NUMBER;
             break;
         case 3: // Recognized '\,',	Shortest string ","
@@ -750,76 +749,7 @@ return (int)Tokens.RIGHT_PARENTHESES;
 /*  User code is in ParseHelper.cs  */
 
 // =============================================================
-
-public abstract class Node
-{
-
-}
-public class SinNode:Node
-{
-    Node _child;
-    public SinNode(Node child){
-        this._child = child;
-    }
-}
-public class CosNode:Node
-{
-    Node _child;
-    public CosNode(Node child){
-        this._child = child;
-    }
-}
-public class PlusNode:Node
-{
-    Node _left;
-    Node _right;
-    public PlusNode(Node lfs,Node right){
-        this._left = lfs;
-        this._right = right;
-    }
-}
-public class MinusNode:Node
-{
-      Node _left;
-        Node _right;
-    public MinusNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-
-public class MulNode:Node
-{
-    Node _left;
-      Node _right;
-    public MulNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-public class DivideNode:Node
-{
-    Node _left;
-      Node _right;
-    public DivideNode(Node lfs,Node right){
-         this._left = lfs;
-         this._right = right;
-    }
-}
-public class VariableNode:Node
-{
-    string _paramName;
-    public VariableNode(string param){
-        this._paramName = param;
-    }
-}
-public class ConstNode:Node
-{
-    float _value;
-    public ConstNode(string param){
-        this._value = float.Parse(param);
-    }
-}
+ 
 
 public static Node MakeSinNode(Node rhs ) {
  return new SinNode( rhs );

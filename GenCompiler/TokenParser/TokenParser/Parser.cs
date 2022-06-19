@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  DESKTOP-1F8U1G4
-// DateTime: 2022/5/5 11:37:40
+// DateTime: 2022/6/7 22:34:37
 // UserName: zyxia
-// Input file <.\MathExpr.y - 2022/5/5 11:32:52>
+// Input file <.\MathExpr.y - 2022/6/7 22:34:30>
 
 // options: lines report gplex
 
@@ -111,46 +111,63 @@ public partial class Parser: ShiftReduceParser<MathParser.Scanner.Node, LexLocat
     switch (action)
     {
       case 2: // expres_s -> LEFT_PARENTHESES, expres_s, RIGHT_PARENTHESES
-#line 23 ".\MathExpr.y"
-                                                            { CurrentSemanticValue = ValueStack[ValueStack.Depth-2];}
+#line 24 ".\MathExpr.y"
+        {
+            CurrentSemanticValue = ValueStack[ValueStack.Depth-2];
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 3: // expres_s -> expres_s, PLUS, expres_s
-#line 24 ".\MathExpr.y"
-                                                            { CurrentSemanticValue = MathParser.Scanner.MakePlusNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);}
+#line 29 ".\MathExpr.y"
+        {
+            CurrentSemanticValue = MathParser.Scanner.MakePlusNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);
+           MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 4: // expres_s -> expres_s, MINUS, expres_s
-#line 25 ".\MathExpr.y"
-                                                            { CurrentSemanticValue = MathParser.Scanner.MakeMinusNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);}
+#line 34 ".\MathExpr.y"
+        { 
+            CurrentSemanticValue = MathParser.Scanner.MakeMinusNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 5: // expres_s -> expres_s, MUL, expres_s
-#line 26 ".\MathExpr.y"
-                                                            { CurrentSemanticValue = MathParser.Scanner.MakeMulNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);}
+#line 39 ".\MathExpr.y"
+        {
+            CurrentSemanticValue = MathParser.Scanner.MakeMulNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 6: // expres_s -> expres_s, DIVIDE, expres_s
-#line 27 ".\MathExpr.y"
-                                                            { CurrentSemanticValue = MathParser.Scanner.MakeDivideNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);}
+#line 44 ".\MathExpr.y"
+        { 
+            CurrentSemanticValue = MathParser.Scanner.MakeDivideNode(ValueStack[ValueStack.Depth-3],ValueStack[ValueStack.Depth-1]);
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 9: // expres_s -> SIN, LEFT_PARENTHESES, expres_s, RIGHT_PARENTHESES
-#line 30 ".\MathExpr.y"
-                                                            {
-                                                                CurrentSemanticValue = MathParser.Scanner.MakeSinNode(ValueStack[ValueStack.Depth-2]);
-                                                            }
+#line 51 ".\MathExpr.y"
+        {
+            CurrentSemanticValue = MathParser.Scanner.MakeSinNode(ValueStack[ValueStack.Depth-2]);
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 10: // expres_s -> COS, LEFT_PARENTHESES, expres_s, RIGHT_PARENTHESES
-#line 33 ".\MathExpr.y"
-                                                            {
-                                                                CurrentSemanticValue = MathParser.Scanner.MakeCosNode(ValueStack[ValueStack.Depth-2]);
-                                                            }
+#line 56 ".\MathExpr.y"
+        {
+            CurrentSemanticValue = MathParser.Scanner.MakeCosNode(ValueStack[ValueStack.Depth-2]);
+            MathParser.Scanner.Node.Root = CurrentSemanticValue;
+        }
 #line default
         break;
       case 12: // list -> expres_s
-#line 38 ".\MathExpr.y"
+#line 62 ".\MathExpr.y"
                 {yyerrok(); }
 #line default
         break;
@@ -168,7 +185,7 @@ public partial class Parser: ShiftReduceParser<MathParser.Scanner.Node, LexLocat
         return CharToString((char)terminal);
   }
 
-#line 42 ".\MathExpr.y"
+#line 66 ".\MathExpr.y"
 /*
  * All the code is in the helper file RealTreeHelper.cs
  

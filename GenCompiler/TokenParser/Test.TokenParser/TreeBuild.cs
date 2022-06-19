@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using MathParser;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Test.TokenParser
@@ -10,7 +12,18 @@ namespace Test.TokenParser
         [Test]
         public  void BuildTest()
         {
-            string value=  "(x+z)";
+            string value=  "(sin(x)-cos(y))";
+            TestMathFormat(value);
+            value=  "(sin(x)-cos(y-x))";
+            TestMathFormat(value);
+            value=  "(sin(x)-cos(y*x))";
+            TestMathFormat(value);
+            value=  "(sin(x)-cos(x*x))";
+            TestMathFormat(value);
+        }
+
+        public void TestMathFormat(string value)
+        { 
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
             writer.WriteLine(value);
@@ -20,9 +33,25 @@ namespace Test.TokenParser
             var parser = new Parser(scanner);
             Assert.IsTrue(parser.Parse());
             var root = parser.GetRootNode();
-            Console.WriteLine( Newtonsoft.Json.JsonConvert.SerializeObject(root));;
+            
+            /*var settings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Include,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+            };
+            var paramList = new List<string>();
+            root.GetParamList( paramList);
+            int pCount = paramList.Count;
+            Assert.True(pCount == 2);
+            Console.WriteLine( Newtonsoft.Json.JsonConvert.SerializeObject(root,settings));;
             writer.Dispose();
-            stream.Dispose();
+            stream.Dispose();*/
+            
+            root.ToFunction(out var function);
+            var functionD = function.GetDerivative("x");
+            functionD = functionD.Reduce();
+            Console.WriteLine("the x partial  derivative of "+value+" is \n"+functionD.ToString());
         }
     }
 }

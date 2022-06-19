@@ -139,16 +139,17 @@ namespace CodeConfusion3
 
         public static Pattern getExpresionPattern()
         {
+            throw new NotImplementedException();
             CompoundPatternList UnitPatterns = new CompoundPatternList();
             UnitPatterns.eOperatorType = Operator.Operator.eType.eOr;
             UnitPatterns._patterns.Add(getNormalTokenPattern());
             UnitPatterns._patterns.Add(getFunctionCall());
-
+            
         }
         public static Pattern getFunctionCall()
         { 
 
-            PatternLinkedWith
+            //PatternLinkedWith
             CompoundPattern _ParaList = new CompoundPattern();
             {
                 CompoundPattern _ParaDotEnd = new CompoundPattern();
@@ -178,7 +179,7 @@ namespace CodeConfusion3
         }
         public static Pattern getFunctionDefine()
         {
-
+            throw new NotImplementedException();
         }
         public static Pattern getTypePattern()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeConfusion3.Common;
 
 namespace CodeConfusion
 {
@@ -50,7 +51,7 @@ namespace CodeConfusion
         static bool canNextToken(char c)
         {
             string srcSeparator = " \n\r-+*/%;,()<>=[]{}!~";
-            return  TempTextSelfIsSeparator() || (tempText.Length>0 && srcSeparator.Contains(c))||(!Tool.isInterger(tempText)&&c=='.');
+            return  TempTextSelfIsSeparator() || (tempText.Length>0 && srcSeparator.Contains(c))||(!StringUtil.isInterger(in tempText)&&c=='.');
         }
          
 

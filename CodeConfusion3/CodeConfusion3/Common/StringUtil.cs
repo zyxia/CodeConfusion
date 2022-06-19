@@ -1,7 +1,15 @@
 ﻿namespace CodeConfusion3.Common
 {
-    public class StringUtil
+    public static class StringUtil
     {
-        
+        public static int rCharCount(ref string textTemp, int textTempLength, char c)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static bool isInterger(in string tempText)
+        {
+            return int.TryParse(tempText, out var v);
+        }
     }
 }

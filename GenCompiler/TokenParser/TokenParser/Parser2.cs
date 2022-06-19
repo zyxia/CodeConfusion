@@ -11,7 +11,7 @@ namespace MathParser
 
         public Scanner.Node GetRootNode()
         {
-            return CurrentSemanticValue;
+            return MathParser.Scanner.Node.Root;
         }
     }
 }
